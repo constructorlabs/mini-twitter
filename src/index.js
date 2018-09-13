@@ -7,5 +7,10 @@ document.querySelector('form').addEventListener('submit', e => {
   const timelineNode = document.querySelector('.timeline');
   const refTweetNode = document.querySelector('.timeline div:first-child');
   timelineNode.insertBefore(newTweetNode, refTweetNode);
-  document.querySelector('#tweet').value = "";
+  document.querySelector('#tweet').value = '';
+  document.querySelector('#count').textContent = 0;
+});
+
+document.querySelector('#tweet').addEventListener('input', e => {
+  document.querySelector('#count').textContent = e.target.value.length;
 });
