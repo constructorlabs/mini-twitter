@@ -1,7 +1,10 @@
 const form = document.querySelector('form');
 const textArea = document.querySelector('#areaText');
 let lastTweet;
+let tweet;
 const counter = document.querySelector('.counter');
+//Select parent to post tweet under
+const timeline = document.querySelector('.timeline');
 let tweetStr = '';
 let charCount = 0;
 let belowCharLimit = true;
@@ -25,10 +28,20 @@ form.addEventListener('submit', event => {
         //Create div shell
         const div = document.createElement('div');
 
+        //Check for @
+        if (tweetStr.includes('@')) {
+            tweetStr.split(' ').map(item => {
+                if (item[0]==='@') return 
+            })        
+        }
+
+        else {
         //Tweet p element
-        const tweet = document.createElement('p'); // <p></p>
+        tweet = document.createElement('p'); // <p></p>
         const tweetText = document.createTextNode(tweetStr); // sdlfkjsdlfksldf
         tweet.appendChild(tweetText); // <p>sldfsldfkjslkdf</p>
+        console.log(tweet.innerHTML);
+        }
 
         //Button element
         const button = document.createElement('button'); // <button></button>
@@ -40,15 +53,20 @@ form.addEventListener('submit', event => {
         div.appendChild(tweet);
         div.appendChild(button);
 
-        //Select parent to post tweet under
-        const parentNode = document.querySelector('.timeline');
-
         //Post above last tweet
-        lastTweet = parentNode.insertBefore(div,lastTweet);
+        timeline.insertBefore(div,lastTweet);
+        lastTweet = [...timeline.children][0];
 
         //Clean up
         counter.textContent = 0;
         form.reset(); 
+
+        //Add button listeners
+        button.addEventListener('click', event => {
+            timeline.removeChild(event.target.parentNode);
+        });
     }
     else alert("Above character limit!");
 });
+
+
