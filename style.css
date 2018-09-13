@@ -1,0 +1,78 @@
+html {
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+form {
+  /*   background: lemonchiffon; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+label {
+  text-align: center;
+  font-weight: bold;
+  font-family: sans-serif;
+  margin: 1em 0;
+}
+
+textarea {
+  align-self: stretch;
+  height: 4rem;
+  padding: 0.25em;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.counter {
+  align-self: stretch;
+  display: flex;
+  justify-content: flex-end;
+  align-content: stretch;
+}
+
+.counter p {
+  /* flex: 1; */
+}
+.counter p {
+  text-transform: uppercase;
+  font-size: 0.8em;
+}
+.counter p:first-child {
+  /* flex: 2; */
+  margin-right: 4px;
+}
+
+button#submit {
+  background: orange;
+  border: none;
+  border-radius: 1em;
+  width: 60%;
+  padding: 0.5em;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.timeline div {
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  margin: 1em 0;
+  padding: 0.5em;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.delete {
+  align-self: flex-end;
+  padding: 0.25em 0.5em;
+  background: rgb(34, 34, 34);
+  border: none;
+  border-radius: 2em;
+  color: rgb(231, 171, 7);
+}

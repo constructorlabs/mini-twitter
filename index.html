@@ -6,21 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mini Twitter</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="src/style.css">
+
 </head>
 
 <body>
     <div class="app">
-        <form action="">
-            <label for="tweet">Your tweet goes here:</label>
-            <textarea name="tweet" id="tweet" cols="30" rows="10"></textarea>
+        <form>
+            <label for="tweet">Start typing your tweet</label>
+            <textarea name="tweet" id="tweet"></textarea>
             <div class="counter">
                 <p>Character count:</p>
                 <p id="count">0</p>
             </div>
-            <button id="sumbit" type="submit">Post it!</button>
+            <button id="submit" type="submit">Post it!</button>
         </form>
         <div class="timeline"></div>
     </div>
