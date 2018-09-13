@@ -3,7 +3,6 @@ const textArea = document.querySelector('#areaText');
 let lastTweet;
 let tweet;
 const counter = document.querySelector('.counter');
-//Select parent to post tweet under
 const timeline = document.querySelector('.timeline');
 let tweetStr = '';
 let charCount = 0;
@@ -22,26 +21,29 @@ textArea.addEventListener('input', event => {
 });
 
 form.addEventListener('submit', event => {
-    event.preventDefault();
+    event.preventDefault(); //prevent form from submitting
     
-    if (belowCharLimit) {
+    if (belowCharLimit) { //if char count < 280, proceed with tweet
         //Create div shell
-        const div = document.createElement('div');
+        const div = document.createElement('div'); //<div></div>
+        tweet = document.createElement('p'); // <p></p>
 
         //Check for @
         if (tweetStr.includes('@')) {
-            tweetStr.split(' ').map(item => {
-                if (item[0]==='@') return 
-            })        
+            let myArr = tweetStr.split(' ');
+            
+            myArr = myArr.map(item => {
+                if (item[0]==='@') {
+                    const handle =  item.slice(1);
+                    return `<a href="/${handle}">@${handle}</a>`;
+                }
+                else return item;
+            });
+            tweetStr = myArr.join(' '); 
+            console.log(tweetStr);
         }
 
-        else {
-        //Tweet p element
-        tweet = document.createElement('p'); // <p></p>
-        const tweetText = document.createTextNode(tweetStr); // sdlfkjsdlfksldf
-        tweet.appendChild(tweetText); // <p>sldfsldfkjslkdf</p>
-        console.log(tweet.innerHTML);
-        }
+        tweet.innerHTML = tweetStr; //Tweet p element
 
         //Button element
         const button = document.createElement('button'); // <button></button>
@@ -64,6 +66,7 @@ form.addEventListener('submit', event => {
         //Add button listeners
         button.addEventListener('click', event => {
             timeline.removeChild(event.target.parentNode);
+            lastTweet = [...timeline.children][0];
         });
     }
     else alert("Above character limit!");
