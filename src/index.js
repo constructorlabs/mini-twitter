@@ -1,8 +1,10 @@
 document.querySelector('form').addEventListener('submit', e => {
   e.preventDefault();
   let newTweet = document.querySelector('#tweet').value;
-  let tweetArr = newTweet.split(" ");
-  newTweet = tweetArr.map(word => word.startsWith("@") ? `<a href="#">${word}</a>` : word).join(" ");
+  let tweetArr = newTweet.split(' ');
+  newTweet = tweetArr
+    .map(word => (word.startsWith('@') ? `<a href="#">${word}</a>` : word))
+    .join(' ');
   newTweet = `<p> ${newTweet} </p>
               <button class="delete"><i class="fas fa-trash-alt"></i></button>`;
   const newTweetNode = document.createElement('div');
@@ -12,15 +14,13 @@ document.querySelector('form').addEventListener('submit', e => {
   const refTweetNode = document.querySelector('.timeline div:first-child');
   if (document.querySelector('#tweet').value.length <= 280) {
     timelineNode.insertBefore(newTweetNode, refTweetNode);
+    const deleteButton = document.querySelector('.delete');
+    deleteButton.addEventListener('click', e => {
+      timelineNode.removeChild(e.target.parentElement);
+    });
     document.querySelector('#tweet').value = '';
     document.querySelector('#count').textContent = 0;
   }
-  const deleteButtons = document.querySelectorAll('.delete');
-  deleteButtons.forEach(deleteButton => {
-    deleteButton.addEventListener('click', e => {
-        timelineNode.removeChild(e.target.parentElement.parentElement);
-    });
-  });
 });
 
 document.querySelector('#tweet').addEventListener('input', e => {
