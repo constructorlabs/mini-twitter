@@ -1,8 +1,10 @@
 document.querySelector('form').addEventListener('submit', e => {
   e.preventDefault();
   let newTweet = document.querySelector('#tweet').value;
+  let tweetArr = newTweet.split(" ");
+  newTweet = tweetArr.map(word => word.startsWith("@") ? `<a href="#">${word}</a>` : word).join(" ");
   newTweet = `<p> ${newTweet} </p>
-              <p class='delete'><i class="fas fa-trash-alt"></i></p>`;
+              <button class="delete"><i class="fas fa-trash-alt"></i></button>`;
   const newTweetNode = document.createElement('div');
 
   newTweetNode.innerHTML = newTweet;
@@ -16,7 +18,7 @@ document.querySelector('form').addEventListener('submit', e => {
   const deleteButtons = document.querySelectorAll('.delete');
   deleteButtons.forEach(deleteButton => {
     deleteButton.addEventListener('click', e => {
-      timelineNode.removeChild(e.target.parentNode.parentNode);
+        timelineNode.removeChild(e.target.parentElement.parentElement);
     });
   });
 });
