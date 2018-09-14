@@ -1,12 +1,16 @@
 const form = document.querySelector('form');
-const textArea = document.querySelector('#areaText');
+const textArea = document.querySelector('#textArea');
 let lastTweet;
 let tweet;
-const counter = document.querySelector('.counter');
+const charCounter = document.querySelector('.charCount');
+const tweetCounter = document.querySelector('.tweetCount');
 const timeline = document.querySelector('.timeline');
 let tweetStr = '';
 let charCount = 0;
+let tweetCount = 0;
 let belowCharLimit = true;
+charCounter.textContent = 0;
+tweetCounter.textContent = 0;
 
 textArea.addEventListener('input', event => {
     charCount = event.target.value.length;
@@ -14,18 +18,21 @@ textArea.addEventListener('input', event => {
     else belowCharLimit = false;
     
     tweetStr = event.target.value;
-    counter.textContent = charCount;
+    charCounter.textContent = charCount;
 
-    if (!belowCharLimit) counter.style.color = "red";
-    else counter.style.color = "black";
+    if (!belowCharLimit) charCounter.style.color = "red";
+    else charCounter.style.color = "black";
 });
 
 form.addEventListener('submit', event => {
     event.preventDefault(); //prevent form from submitting
-    
-    if (belowCharLimit) { //if char count < 280, proceed with tweet
+    console.log(charCount);
+    if (charCount === 0) alert('Cannot post empty tweet!');
+
+    else if (belowCharLimit) { //if char count < 280, proceed with tweet
         //Create div shell
         const div = document.createElement('div'); //<div></div>
+        div.setAttribute('class','tweet');
         tweet = document.createElement('p'); // <p></p>
 
         //Check for @
@@ -40,9 +47,7 @@ form.addEventListener('submit', event => {
                 else return item;
             });
             tweetStr = myArr.join(' '); 
-            console.log(tweetStr);
         }
-
         tweet.innerHTML = tweetStr; //Tweet p element
 
         //Button element
@@ -50,6 +55,7 @@ form.addEventListener('submit', event => {
         const buttonText = document.createTextNode("Delete"); //"Delete"
         button.appendChild(buttonText);
         button.setAttribute('type','button');
+        button.setAttribute('class','delete');
 
         //Add tweet and button to div wrapper
         div.appendChild(tweet);
@@ -58,15 +64,20 @@ form.addEventListener('submit', event => {
         //Post above last tweet
         timeline.insertBefore(div,lastTweet);
         lastTweet = [...timeline.children][0];
-
+        tweetCount++;
+        tweetCounter.textContent = tweetCount;
         //Clean up
-        counter.textContent = 0;
+        charCount = 0;
+        charCounter.textContent = 0;
         form.reset(); 
+        tweetStr = '';
 
         //Add button listeners
         button.addEventListener('click', event => {
             timeline.removeChild(event.target.parentNode);
             lastTweet = [...timeline.children][0];
+            tweetCount--;
+            tweetCounter.textContent = tweetCount;
         });
     }
     else alert("Above character limit!");

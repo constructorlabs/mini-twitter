@@ -2,18 +2,20 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
     <title>Mini Twitter</title>
   </head>
   <body>
     <div>
       <form class="aForm">
-        <input type="text" id="areaText" name="text_Area">
-        <input type="submit" id="submitButton" name="button_Submit">
+        <textarea name="textArea" id="textArea" cols="30" rows="10"></textarea>
+        <input type="submit" id="submitButton" name="button_Submit" value="Tweet!">
       </form>
     </div>
     
-    <div class="counter"></div>
 
+    <div class='counter'>Character count: <p class='charCount'></p></div>
+    <div class='counter'>Tweet count: <p class='tweetCount'></p></div>
     <div class="timeline"> 
             
     </div>
